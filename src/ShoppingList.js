@@ -6,10 +6,15 @@ function ShoppingList(props) {
   let price = props.product.price.original;
   let dis = props.product.price.discount;
   dis = dis / 100;
-  let total = 0;
-
-  if (dis > 0.01) {
+  let total = price;
+  if (dis > 0.0) {
     total = price - dis;
+  }
+
+  let save = <p>You Saved {dis}%!</p>;
+
+  if (dis === 0) {
+    save = <p></p>;
   }
 
   return (
@@ -22,9 +27,7 @@ function ShoppingList(props) {
           currency: "USD",
         })}
       </p>
-      <p id="save" className="savings">
-        You Saved {dis}%!
-      </p>
+      <div>{save}</div>
     </div>
   );
 }
