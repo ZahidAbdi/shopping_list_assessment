@@ -3,15 +3,27 @@
 import React from "react";
 
 function ShoppingList(props) {
+  let price = props.product.price.original;
+  let dis = props.product.price.discount;
+  dis = dis / 100;
+  let total = 0;
+
+  if (dis > 0.01) {
+    total = price - dis;
+  }
+
   return (
     <div className="list">
       <h2>{props.product.name}</h2>
       <p>{props.product.category}</p>
       <p>
-        {props.product.price.original.toLocaleString("en-US", {
+        {total.toLocaleString("en-US", {
           style: "currency",
           currency: "USD",
         })}
+      </p>
+      <p id="save" className="savings">
+        You Saved {dis}%!
       </p>
     </div>
   );
